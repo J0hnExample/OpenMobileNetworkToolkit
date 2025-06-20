@@ -24,21 +24,14 @@ public class CellInformation extends Information {
     private CellType cellType;
     private String alphaLong;
     private String bands;
-
     private long ci;
     private String mnc;
     private int pci;
     private int tac;
-
     private int level;
     private int asuLevel;
-
-
     private boolean isRegistered;
     private int cellConnectionStatus;
-
-
-
 
     private String getPath(){
         switch (cellType){
@@ -48,10 +41,9 @@ public class CellInformation extends Information {
                 return "cell_information_lte.json";
             case NR:
                 return "cell_information_nr.json";
-            case CDMA:
-                return "cell_information_cdma.json";
+            case WCDMA:
+                return "cell_information_wcdma.json";
             case UNKNOWN:
-                return "cell_information_unknown.json";
             default:
                 return "cell_information_unknown.json";
         }

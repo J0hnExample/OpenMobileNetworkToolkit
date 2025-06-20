@@ -1,3 +1,11 @@
+/*
+ * SPDX-FileCopyrightText:  2025 Peter Hasse <peter.hasse@fokus.fraunhofer.de>
+ * SPDX-FileCopyrightText: 2025 Johann Hackler <johann.hackler@fokus.fraunhofer.de>
+ * SPDX-FileCopyrightText: 2025 Fraunhofer FOKUS
+ *
+ *  SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package de.fraunhofer.fokus.OpenMobileNetworkToolkit.DataProvider;
 
 import android.util.Log;
@@ -20,22 +28,27 @@ public class BuildInformation extends Information {
         super(timeStamp);
     }
 
+    /** @noinspection SameReturnValue*/
     public String getBuildType() {
         return BuildConfig.BUILD_TYPE;
     }
 
+    /** @noinspection SameReturnValue*/
     public int getVersionCode() {
         return BuildConfig.VERSION_CODE;
     }
 
+    /** @noinspection SameReturnValue*/
     public String getVersionName() {
         return BuildConfig.VERSION_NAME;
     }
 
+    /** @noinspection SameReturnValue*/
     public String getApplicationId() {
         return BuildConfig.APPLICATION_ID;
     }
 
+    /** @noinspection SameReturnValue*/
     public boolean isDebug() {
         return BuildConfig.DEBUG;
     }

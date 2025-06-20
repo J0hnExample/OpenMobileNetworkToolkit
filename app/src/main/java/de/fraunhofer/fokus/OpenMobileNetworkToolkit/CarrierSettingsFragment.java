@@ -22,10 +22,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,6 +46,15 @@ public class CarrierSettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NavController navController = NavHostFragment.findNavController(this);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                navController.navigate(R.id.HomeFragment);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
     }
 
     @Override
@@ -59,7 +71,7 @@ public class CarrierSettingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Button btn_read = requireView().findViewById(R.id.button_read_carrier_settings);
-        btn_read.setOnClickListener(this::read_settings);
+        btn_read.setOnClickListener(view1 -> read_settings());
 
         CardView cv = requireView().findViewById(R.id.carrier_settings_card_view);
         cv.setRadius(15);
@@ -73,7 +85,8 @@ public class CarrierSettingsFragment extends Fragment {
     /**
     * Convert a persistent bundle to a string map. It seems there is no nice way to this.
     * Nested bundles will be flattened to string
-    */
+     * @noinspection ResultOfMethodCallIgnored
+     */
     private Map<String, String> bundle_to_map(PersistableBundle bundle) {
         Map<String, String> map = new HashMap<>();
         for (String key : bundle.keySet()) {
@@ -110,7 +123,7 @@ public class CarrierSettingsFragment extends Fragment {
         return map;
     }
 
-    private void read_settings(View view) {
+    private void read_settings() {
         CardView cv = requireView().findViewById(R.id.carrier_settings_card_view);
         cv.removeAllViews();
         TableLayout tl = new TableLayout(context);
